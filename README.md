@@ -1,1 +1,1 @@
-# React_study
+# React_study 레쮸꼬!
