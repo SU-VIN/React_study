@@ -1,15 +1,15 @@
-import './App.css';
+// import './App.css';
 import MyHeader from './MyHeader';
-import MyFooter from './MyFooter';
+import Counter from './Counter';
+import React  from 'react';
+
 function App() {
-  let name = "suvin"
+  const number = 5;
 
   return (
-    <div className="App">
+    <div>
       <MyHeader />
-        <h2>안녕 리액트{name}</h2>
-        <b id = 'bold_text'>React.js</b>
-      <MyFooter />
+      <Counter />
     </div>
   );
 }
