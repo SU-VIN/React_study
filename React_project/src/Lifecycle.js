@@ -5,7 +5,7 @@ const UmmountTest = ()=>{
     useEffect(()=>{
         console.log("Mount")
 
-        return()=>{
+        return()=>{ //콜백함수에서 함수를 리턴하게되면 unmount를 실행할 수 있음
             //Unmount 시점에 실행되게 됨
             console.log("Unmount")
         }
