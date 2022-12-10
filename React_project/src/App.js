@@ -1,13 +1,13 @@
-import React,{ useEffect, useRef,useState } from 'react';
+import React,{ useEffect, useMemo, useRef,useState } from 'react';
 import './App.css'
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
+import OptimizeTest from './OptimizeTest';
 
-//https://jsonplaceholder.typicode.com/comments
 
 // const dummyList = [
 //   {
-//     id:1,
+//     id:1 ,
 //     author:"임수빈",
 //     content:"hello",
 //     emotion:4,
@@ -73,7 +73,6 @@ function App() {
   }
 
   const onRemove=(targetId)=>{
-    console.log(`${targetId}가 삭제되었습니다`);
     const newDiaryList = data.filter((it)=>it.id !== targetId);
     setData(newDiaryList);
   }
@@ -84,10 +83,30 @@ function App() {
     )
 
   }
+  //리턴을가지고 있는 함수 useMemo 사용가능
+  //useMemo는 첫밴째 인자로 콜백함수를 받아서 이 콜백함수가 리턴하는 값
+  //두번째 인자는 빈배열, 두번째 인자가 변화할때만 콜백함수 실행
+  //즉 데이터가 추가될때만 일기분석을 한다는 내용!
+  //이렇게 getDiaryAnalysis는 리턴받은 값을 가지므로 더이상 함수가 아님!! 변수처럼 대해죠
+  const getDiaryAnalysis= useMemo(
+    ()=>{
+    const goodCount = data.filter((it)=>it.emotion>=3).length;
+    const badCount = data.length-goodCount;
+    const goodRatio = (goodCount/data.length)*100;
+    return{goodCount,badCount,goodRatio};
+  },[data.length]
+  );
+
+  const{goodCount,badCount,goodRatio} = getDiaryAnalysis; //비구조화 객체 할당
 
   return (
     <div className="App">
+      <OptimizeTest />
       <DiaryEditor onCreate={onCreate}/>
+      <div>전체 일기 : {data.length}</div>
+      <div>기분 좋은 일기 개수 : {goodCount}</div>
+      <div>기분 나쁜 일기 개수 : {badCount}</div>
+      <div>기분 좋은 일기 비율 : {goodRatio}%</div>
       <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit}/>
     </div>
   );
