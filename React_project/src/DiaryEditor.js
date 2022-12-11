@@ -11,9 +11,6 @@ const DiaryEditor =({onCreate})=>{
     //사용자의 입력을 리액트에서 핸들링하기위해선 state를 사용할 수 있음 
 
 
-    useEffect(()=>{
-        console.log("DiaryEditor 렌더");
-    });
 
     const authorInput = useRef();
     const contentInput = useRef();
@@ -29,8 +26,6 @@ const DiaryEditor =({onCreate})=>{
     // const[content,setContent] = useState("내용을 입력하세요")
 
     const handleChangeState = (e)=>{
-        console.log(e.target.name);
-        console.log(e.target.value);
 
         setState({
             ...state,

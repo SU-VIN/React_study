@@ -72,17 +72,18 @@ function App() {
     setData((data)=>[newItem,...data])
   },[]);
 
-  const onRemove=(targetId)=>{
-    const newDiaryList = data.filter((it)=>it.id !== targetId);
-    setData(newDiaryList);
-  }
+  const onRemove=useCallback((targetId)=>{
+    setData((data)=>data.filter((it)=>it.id !== targetId));
+  },[]);
 
-  const onEdit = (targetid,newContent)=>{
-    setData(
-      data.map((it)=>it.id===targetid?{...it,content:newContent}:it)
+  const onEdit = useCallback((targetid,newContent)=>{
+    setData((data)=>
+      data.map((it)=>
+      it.id===targetid?{...it,content:newContent}:it)
     )
+  
+  },[]);
 
-  }
   //리턴을가지고 있는 함수 useMemo 사용가능
   //useMemo는 첫밴째 인자로 콜백함수를 받아서 이 콜백함수가 리턴하는 값
   //두번째 인자는 빈배열, 두번째 인자가 변화할때만 콜백함수 실행
