@@ -1,10 +1,19 @@
-import{useRef,useState} from "react"
+import React,{useEffect,useRef,useState} from "react"
+//컴포넌트가 렌더링 일어날때
+//1. 가진 state에 변화가 생길때
+//2. 부모 컴포넌트가 리렌더링 되었을때
+//3. 자신이 받은 프롭이 변경될때
 
-const DiaryEditor = ({onCreate})=>{
+const DiaryEditor =({onCreate})=>{
     //1.작성자
     //2.일기본문
     //3.감정점수
     //사용자의 입력을 리액트에서 핸들링하기위해선 state를 사용할 수 있음 
+
+
+    useEffect(()=>{
+        console.log("DiaryEditor 렌더");
+    });
 
     const authorInput = useRef();
     const contentInput = useRef();
@@ -13,7 +22,7 @@ const DiaryEditor = ({onCreate})=>{
         author:"",
         content:"",
         emotion:1
-    })
+    });
 
     //동일한 행동을 위에것으로 통합
     // const[author, setAuthor] = useState(""); 
@@ -78,8 +87,7 @@ const DiaryEditor = ({onCreate})=>{
                 <button onClick={handleSubmit}>일기 저장하기</button>
             </div>
         </div>
-    )
+    );
 
-}
-
-export default DiaryEditor;
+};
+export default React.memo(DiaryEditor);
