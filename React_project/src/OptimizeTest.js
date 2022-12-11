@@ -27,12 +27,23 @@ const CounterA = React.memo(({count})=>{
 });
 
 //객체는 얕은비교.. 즉 값을 비교하는게아닌 주소비교를함
-const CounterB = React.memo(({obj})=>{
+const CounterB = ({obj})=>{
     useEffect(()=>{
         console.log(`counter b update:: ${obj.count}`)
     });
     return <div>{obj.count}</div>;
-});
+};
+
+const areEqual = (prevProps,nextProps)=>{
+    // return true // 이전 프롭과 현재 프롭이 같다 - 리렌더 x
+    // return false // 이전 프롭과 현재 프롭이 다르다 - 리렌더를 해라
+
+    if(prevProps.obj.count=== nextProps.obj.count) return true;
+    else return false;
+
+}
+//CounterB는 areEqual에 따라서 리렌더 여부가 결정됨
+const MemoizeCounterB = React.memo(CounterB,areEqual);
 
 const OptimizeTest= ()=>{
 
@@ -50,7 +61,7 @@ const OptimizeTest= ()=>{
         </div>
         <div>
             <h2>Counter B</h2>
-            <CounterB obj={obj}/>
+            <MemoizeCounterB obj={obj}/>
             <button onClick={()=>setObj({
                 count: obj.count
             })}>B button</button>
