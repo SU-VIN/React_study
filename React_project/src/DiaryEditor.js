@@ -1,15 +1,17 @@
-import React,{useEffect,useRef,useState} from "react"
+import React,{useContext, useEffect,useRef,useState} from "react"
+import { DiaryDispatchContext } from "./App";
 //컴포넌트가 렌더링 일어날때
 //1. 가진 state에 변화가 생길때
 //2. 부모 컴포넌트가 리렌더링 되었을때
 //3. 자신이 받은 프롭이 변경될때
 
-const DiaryEditor =({onCreate})=>{
+const DiaryEditor =()=>{
     //1.작성자
     //2.일기본문
     //3.감정점수
     //사용자의 입력을 리액트에서 핸들링하기위해선 state를 사용할 수 있음 
 
+    const {onCreate}=useContext(DiaryDispatchContext);
 
 
     const authorInput = useRef();

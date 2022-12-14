@@ -51,8 +51,10 @@ const reducer = (state,action)=>{
     default: return state;
   }
 }
+//export default는 파일에 하나밖에 못씀 하지만 그냥 export는 여러개가능
+export const DiaryStateContext = React.createContext();
 
-
+export const DiaryDispatchContext = React.createContext();
 
 //부모컴포넌트에서 자식컴포넌트에게 어떤값을 이름을붙여서 보내는게 prop
 //diaryList === prop임
@@ -114,6 +116,10 @@ function App() {
     dispatch({type:"EDIT",targetid,newContent})
   },[]);
 
+  const memoizedDispatches = useMemo(()=>{
+    return{onCreate,onRemove,onEdit}
+  },[])
+
   //리턴을가지고 있는 함수 useMemo 사용가능
   //useMemo는 첫밴째 인자로 콜백함수를 받아서 이 콜백함수가 리턴하는 값
   //두번째 인자는 빈배열, 두번째 인자가 변화할때만 콜백함수 실행
@@ -131,14 +137,18 @@ function App() {
   const{goodCount,badCount,goodRatio} = getDiaryAnalysis; //비구조화 객체 할당
 
   return (
+    <DiaryStateContext.Provider value={data}>
+      <DiaryDispatchContext.Provider value={memoizedDispatches}>
     <div className="App">
       <DiaryEditor onCreate={onCreate}/>
       <div>전체 일기 : {data.length}</div>
       <div>기분 좋은 일기 개수 : {goodCount}</div>
       <div>기분 나쁜 일기 개수 : {badCount}</div>
       <div>기분 좋은 일기 비율 : {goodRatio}%</div>
-      <DiaryList diaryList={data} onRemove={onRemove} onEdit={onEdit}/>
+      <DiaryList onRemove={onRemove} onEdit={onEdit}/>
     </div>
+    </DiaryDispatchContext.Provider>
+    </DiaryStateContext.Provider>
   );
 }
 
