@@ -3,7 +3,7 @@ import { DiaryDispatchContext } from "./App";
 //컴포넌트가 렌더링 일어날때
 //1. 가진 state에 변화가 생길때
 //2. 부모 컴포넌트가 리렌더링 되었을때
-//3. 자신이 받은 프롭이 변경될때
+//3. 자신이 받은 프롭이 //
 
 const DiaryEditor =()=>{
     //1.작성자
