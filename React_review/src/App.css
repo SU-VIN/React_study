@@ -1,4 +1,27 @@
- .App{
-  text-align: center;
-  padding-top: 100px;
- }
+.DiaryEditor{
+    border: 1px solid gray;
+    text-align: center;
+    padding: 20px;
+}
+
+.DiaryEditor input,textarea{
+     margin-bottom: 20px;
+     width: 300px;
+     padding: 5px;
+}
+
+.DiaryEditor textarea{
+    padding: 20px;
+}
+
+.DiaryEditor select{
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.DiaryEditor button{
+    width: 200px;
+    padding: 10px;
+    cursor: pointer;
+}
