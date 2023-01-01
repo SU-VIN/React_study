@@ -23,7 +23,6 @@ const DiaryItem=({
             onDelete(id);
         }
     }
-    //수정상태에서 나간다
     const handleQuitEdit = ()=>{
         setIsEdit(false);
         setLocalContent(content);
