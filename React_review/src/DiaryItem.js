@@ -1,4 +1,5 @@
-import React,{ useRef, useState } from "react";
+import React,{ useContext, useRef, useState } from "react";
+import { DiaryDispatchContext } from "./App";
 
 const DiaryItem=({
     author,
@@ -6,10 +7,9 @@ const DiaryItem=({
     emotion,
     created_date,
     id,
-    onDelete,
-    onEdit,
 })=>{
 
+    const{onDelete,onEdit}=useContext(DiaryDispatchContext);
     const localContentInput = useRef(); 
 
     const [isEdit,setIsEdit]=useState(false);
